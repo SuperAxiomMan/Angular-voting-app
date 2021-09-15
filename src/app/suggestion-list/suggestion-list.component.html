@@ -1,0 +1,5 @@
+<div *ngIf="!(restaurants$ | async)">loading...</div>
+
+<div *ngFor="let resto of restaurants$ | async">
+  {{ resto.name }}
+</div>

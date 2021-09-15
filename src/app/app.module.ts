@@ -18,9 +18,10 @@ import { AngularFireModule } from '@angular/fire/compat/';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import firestoreConfig from 'my-firestore';
+import { SuggestionListComponent } from './suggestion-list/suggestion-list.component';
 
 @NgModule({
-  declarations: [AppComponent, SuggestionFormComponent],
+  declarations: [AppComponent, SuggestionFormComponent, SuggestionListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

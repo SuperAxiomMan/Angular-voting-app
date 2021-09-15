@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ng-voting-app": {
+      "hosting": {
+        "angular-voting-app": [
+          "ng-voting-app"
+        ]
+      }
+    }
+  }
+}

@@ -1,8 +1,16 @@
 <h3>results</h3>
-<div *ngIf="sortedRestaurants">
-  <ul>
-    <li *ngFor="let resto of sortedRestaurants">
-      {{ resto.votes }} votes for {{ resto.name }}
-    </li>
-  </ul>
-</div>
+<mat-selection-list
+  #resto
+  [multiple]="false"
+  (selectionChange)="onSelectionChange($event)"
+>
+  <mat-list-option
+    *ngFor="let resto of sortedRestaurants"
+    [value]="resto"
+    (click)="openModal(resto)"
+  >
+    {{ pluralizeResultString(resto) }}
+  </mat-list-option>
+</mat-selection-list>
+
+<p>Option selected: {{ resto.selectedOptions.selected[0]?.value }}</p>

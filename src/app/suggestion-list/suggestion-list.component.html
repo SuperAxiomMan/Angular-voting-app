@@ -12,8 +12,7 @@
   <div>Nom : {{ resto.name }}</div>
   <div>Ajouté le : {{ resto.createdAt | date: "dd/MM/yyyy" }}</div>
   <div>
+    <span>Vote</span>
     <button mat-stroked-button color="primary" (click)="vote(resto)">+</button>
-    Vote :
-    {{ setRankLabel(resto) }}
   </div>
 </div>

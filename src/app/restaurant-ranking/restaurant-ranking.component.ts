@@ -1,7 +1,10 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSelectionListChange } from '@angular/material/list';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RestaurantModel } from '../models/restaurant.model';
+import { ModalComponent } from './modal.component';
 
 @Component({
   selector: 'app-restaurant-ranking',
@@ -12,8 +15,9 @@ export class RestaurantRankingComponent implements OnChanges {
   @Input()
   restaurants$?: Observable<RestaurantModel[]>;
   sortedRestaurants?: RestaurantModel[];
+  modalResult: any;
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnChanges(changes: any): void {
     console.log('changes', changes);
@@ -30,5 +34,29 @@ export class RestaurantRankingComponent implements OnChanges {
 
   sortByScore(a: RestaurantModel, b: RestaurantModel) {
     return a.votes > b.votes ? -1 : 1;
+  }
+
+  pluralizeResultString(resto: RestaurantModel) {
+    return `${resto.votes} vote${resto.votes > 1 ? 's' : ''} for ${resto.name}`;
+  }
+
+  onSelectionChange(event: MatSelectionListChange) {
+    console.log(event.source._value?.toString());
+  }
+
+  openModal(resto: any) {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '350px',
+      data: { ...resto },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.modalResult = res;
+      console.log('openDialog.AfterClose', this.modalResult);
+    });
+  }
+
+  confirmModal(resto: any) {
+    this.openModal(resto);
   }
 }

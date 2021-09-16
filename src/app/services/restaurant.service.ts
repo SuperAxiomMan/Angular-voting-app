@@ -19,7 +19,7 @@ export class RestaurantService {
 
   readRestaurant() {
     return this.afs.collection<RestaurantModel>('wte-restaurants', (ref) =>
-      ref.orderBy('votes', 'desc')
+      ref.orderBy('name', 'asc')
     );
   }
 
@@ -27,5 +27,15 @@ export class RestaurantService {
     return this.afs
       .doc(`wte-restaurants/${restaurant.id}`)
       .update({ ...restaurant, votes: restaurant.votes + 1 });
+  }
+
+  removeVote(restaurant: RestaurantModel) {
+    return this.afs
+      .doc(`wte-restaurants/${restaurant.id}`)
+      .update({ ...restaurant, votes: restaurant.votes - 1 });
+  }
+
+  deleteRestaurant(restaurant: RestaurantModel) {
+    return this.afs.doc(`wte-restaurants/${restaurant.id}`).delete();
   }
 }

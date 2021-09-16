@@ -18,6 +18,14 @@ export class RestaurantService {
   }
 
   readRestaurant() {
-    return this.afs.collection<RestaurantModel>('wte-restaurants');
+    return this.afs.collection<RestaurantModel>('wte-restaurants', (ref) =>
+      ref.orderBy('votes', 'desc')
+    );
+  }
+
+  addVote(restaurant: RestaurantModel) {
+    return this.afs
+      .doc(`wte-restaurants/${restaurant.id}`)
+      .update({ ...restaurant, votes: restaurant.votes + 1 });
   }
 }

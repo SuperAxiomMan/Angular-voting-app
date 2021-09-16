@@ -17,6 +17,19 @@ export class SuggestionListComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.restaurantsCollection = await this.restaurantService.readRestaurant();
-    this.restaurants$ = this.restaurantsCollection.valueChanges();
+    this.restaurants$ = this.restaurantsCollection.valueChanges({
+      idField: 'id',
+    });
+  }
+
+  vote(resto: RestaurantModel) {
+    console.log('id', resto.id);
+    this.restaurantService.addVote(resto);
+  }
+
+  setRankLabel(resto: RestaurantModel) {
+    const label =
+      resto.votes <= 1 ? `${resto.votes} vote` : `${resto.votes} votes`;
+    return label;
   }
 }

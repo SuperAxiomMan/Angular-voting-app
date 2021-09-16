@@ -1,5 +1,19 @@
+<div>
+  <app-restaurant-ranking
+    [restaurants$]="restaurants$"
+  ></app-restaurant-ranking>
+</div>
+
 <div *ngIf="!(restaurants$ | async)">loading...</div>
 
 <div *ngFor="let resto of restaurants$ | async">
-  {{ resto.name }}
+  <br />
+
+  <div>Nom : {{ resto.name }}</div>
+  <div>Ajouté le : {{ resto.createdAt | date: "dd/MM/yyyy" }}</div>
+  <div>
+    <button mat-stroked-button color="primary" (click)="vote(resto)">+</button>
+    Vote :
+    {{ setRankLabel(resto) }}
+  </div>
 </div>

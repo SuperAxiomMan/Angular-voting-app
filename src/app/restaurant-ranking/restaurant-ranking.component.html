@@ -1,8 +1,8 @@
-<div class="main">
-  <mat-toolbar color="basic">
-    <mat-toolbar-row *ngFor="let resto of sortedRestaurants">
-      <span> {{ pluralizeResultString(resto) }}</span>
-      <span class="spacer"></span>
+<mat-toolbar color="basic">
+  <mat-toolbar-row *ngFor="let resto of sortedRestaurants">
+    <span> {{ pluralizeResultString(resto) }}</span>
+    <span class="spacer"></span>
+    <button mat-mini-fab color="warn">
       <mat-icon
         class="example-icon"
         aria-hidden="false"
@@ -10,6 +10,6 @@
         (click)="openModal(resto)"
         >delete</mat-icon
       >
-    </mat-toolbar-row>
-  </mat-toolbar>
-</div>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

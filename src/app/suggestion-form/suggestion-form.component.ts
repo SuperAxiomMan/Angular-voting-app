@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { RestaurantService } from '../services/restaurant.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-suggestion-form',
@@ -12,7 +13,8 @@ export class SuggestionFormComponent implements OnInit {
   message: string = '';
   constructor(
     private fb: FormBuilder,
-    private restaurantService: RestaurantService
+    private restaurantService: RestaurantService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -26,10 +28,11 @@ export class SuggestionFormComponent implements OnInit {
     const res = await this.restaurantService.createRestaurant(
       this.suggestionForm.value.name
     );
-    console.log(res.id);
+    console.log(res);
     if(res.id){
-      this.message = `Restaurant ${res.id} created`
+      this.snackBar.open(`Restaurant ${this.suggestionForm.value.name} created`,'close');
     }
     this.suggestionForm.reset();
+
   }
 }

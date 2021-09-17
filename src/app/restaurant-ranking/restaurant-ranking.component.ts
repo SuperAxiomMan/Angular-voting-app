@@ -37,7 +37,8 @@ export class RestaurantRankingComponent implements OnChanges {
   }
 
   pluralizeResultString(resto: RestaurantModel) {
-    return `${resto.votes} vote${resto.votes > 1 ? 's' : ''} for ${resto.name}`;
+    // return `${resto.votes} vote${resto.votes > 1 ? 's' : ''} for ${resto.name}`;
+    return `${resto.name} - ${resto.votes} vote${resto.votes > 1 ? 's' : ''}`;
   }
 
   onSelectionChange(event: MatSelectionListChange) {

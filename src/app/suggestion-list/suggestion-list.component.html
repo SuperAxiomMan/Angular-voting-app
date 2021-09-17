@@ -3,16 +3,31 @@
     [restaurants$]="restaurants$"
   ></app-restaurant-ranking>
 </div>
+<mat-card *ngIf="!(restaurants$ | async)"><mat-spinner></mat-spinner></mat-card>
 
-<div *ngIf="!(restaurants$ | async)">loading...</div>
-
-<div *ngFor="let resto of restaurants$ | async">
-  <br />
-
-  <div>Nom : {{ resto.name }}</div>
-  <div>Ajouté le : {{ resto.createdAt | date: "dd/MM/yyyy" }}</div>
-  <div>
-    <span>Vote</span>
-    <button mat-stroked-button color="primary" (click)="vote(resto)">+</button>
-  </div>
-</div>
+<mat-card *ngFor="let resto of restaurants$ | async">
+  <mat-card-title>{{ resto.name }}</mat-card-title>
+  <mat-card-subtitle
+    >Added : {{ resto.createdAt | date: "dd/MM/yyyy" }}</mat-card-subtitle
+  >
+  <mat-card-actions>
+    <button
+      mat-mini-fab
+      color="primary"
+      aria-label="plus one icon"
+      (click)="vote(resto)"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="primary"
+      aria-label="plus one icon"
+      [disabled]="resto.votes === 0"
+      (click)="unVote(resto)"
+    >
+      <mat-icon>remove_circle</mat-icon>
+    </button>
+  </mat-card-actions>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

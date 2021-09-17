@@ -27,6 +27,12 @@ export class SuggestionListComponent implements OnInit {
     this.restaurantService.addVote(resto);
   }
 
+  unVote(resto: RestaurantModel) {
+    console.log('id', resto.id);
+    this.restaurantService.removeVote(resto);
+  }
+
+
   setRankLabel(resto: RestaurantModel) {
     const label =
       resto.votes <= 1 ? `${resto.votes} vote` : `${resto.votes} votes`;

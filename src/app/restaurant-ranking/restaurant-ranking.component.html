@@ -1,16 +1,15 @@
-<h3>results</h3>
-<mat-selection-list
-  #resto
-  [multiple]="false"
-  (selectionChange)="onSelectionChange($event)"
->
-  <mat-list-option
-    *ngFor="let resto of sortedRestaurants"
-    [value]="resto"
-    (click)="openModal(resto)"
-  >
-    {{ pluralizeResultString(resto) }}
-  </mat-list-option>
-</mat-selection-list>
-
-<p>Option selected: {{ resto.selectedOptions.selected[0]?.value }}</p>
+<div class="main">
+  <mat-toolbar color="basic">
+    <mat-toolbar-row *ngFor="let resto of sortedRestaurants">
+      <span> {{ pluralizeResultString(resto) }}</span>
+      <span class="spacer"></span>
+      <mat-icon
+        class="example-icon"
+        aria-hidden="false"
+        aria-label="Example delete icon"
+        (click)="openModal(resto)"
+        >delete</mat-icon
+      >
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
